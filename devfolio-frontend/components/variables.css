@@ -1,0 +1,239 @@
+/* Navbar */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.site-navbar {
+    max-width: var(--container-width);
+    min-height: var(--navbar-height);
+    margin: auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.brand-dot {
+    color: var(--color-primary);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-links a:hover {
+    color: var(--color-primary);
+}
+
+.nav-login {
+    padding: 9px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.menu-toggle {
+    display: none;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+/* Footer */
+.site-footer {
+    padding: 48px 24px 20px;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-content,
+.footer-bottom {
+    max-width: var(--container-width);
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.footer-about,
+.footer-contact {
+    max-width: 420px;
+}
+
+.footer-about p,
+.footer-bottom {
+    color: var(--color-text-secondary);
+}
+
+.footer-socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.footer-bottom {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+    font-size: var(--font-size-sm);
+}
+
+/* Project cards */
+.project-card,
+.blog-card {
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal);
+}
+
+.project-card:hover,
+.blog-card:hover {
+    transform: translateY(-4px);
+}
+
+.project-card__image,
+.blog-card__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    background: var(--color-surface-alt);
+}
+
+.project-card__placeholder {
+    aspect-ratio: 16 / 10;
+    display: grid;
+    place-items: center;
+    background: var(--color-surface-alt);
+    color: var(--color-text-muted);
+}
+
+.project-card__body,
+.blog-card__body {
+    padding: 20px;
+}
+
+.project-card__body h3,
+.blog-card__body h3 {
+    margin: 8px 0;
+}
+
+.project-card__body p,
+.blog-card__body p {
+    color: var(--color-text-secondary);
+}
+
+.project-card__badge,
+.blog-card__category {
+    display: inline-block;
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+}
+
+.project-card__technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    list-style: none;
+}
+
+.project-card__technologies li {
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    background: var(--color-surface-alt);
+    font-size: var(--font-size-xs);
+}
+
+.project-card__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.project-card__links a,
+.blog-card__read-more {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.blog-card time {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
+/* Pagination */
+.pagination,
+.pagination__pages {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pagination {
+    margin: 32px 0;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+.pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.pagination .pagination__active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+@media (max-width: 700px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .site-navbar {
+        flex-wrap: wrap;
+    }
+
+    .nav-links {
+        display: none;
+        width: 100%;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 0;
+    }
+
+    .nav-links--open {
+        display: flex;
+    }
+
+    .footer-content,
+    .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+    }
+}

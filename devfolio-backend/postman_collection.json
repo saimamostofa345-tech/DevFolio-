@@ -1,0 +1,180 @@
+{
+  "info": {
+    "name": "DevFolio API Collection",
+    "description": "Complete collection for DevFolio Portfolio & Blog API fulfilling requirement B-25.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8000/api" },
+    { "key": "ownerToken", "value": "" },
+    { "key": "visitorId", "value": "f81d4fae-7dec-11d0-a765-00a0c91e6bf6" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Owner Login",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/login/",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"owner\",\n  \"password\": \"YourStrongPassword123!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Refresh Access Token",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/refresh/",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh\": \"<refresh_token_here>\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Current Owner (Me)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/me/",
+            "header": [{ "key": "Authorization", "value": "Bearer {{ownerToken}}" }]
+          }
+        },
+        {
+          "name": "Logout (Blacklist)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/logout/",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{ownerToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh\": \"<refresh_token_here>\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public GET Endpoints",
+      "item": [
+        { "name": "Get Profile", "request": { "method": "GET", "url": "{{baseUrl}}/profile/" } },
+        { "name": "Get Skills", "request": { "method": "GET", "url": "{{baseUrl}}/skills/?ordering=display_order,-proficiency" } },
+        { "name": "Get Experiences", "request": { "method": "GET", "url": "{{baseUrl}}/experiences/" } },
+        { "name": "Get Education", "request": { "method": "GET", "url": "{{baseUrl}}/education/" } },
+        { "name": "Get Projects", "request": { "method": "GET", "url": "{{baseUrl}}/projects/" } },
+        { "name": "Get Project Detail", "request": { "method": "GET", "url": "{{baseUrl}}/projects/portfolio-website/" } },
+        { "name": "Get Categories", "request": { "method": "GET", "url": "{{baseUrl}}/categories/" } },
+        { "name": "Get Tags", "request": { "method": "GET", "url": "{{baseUrl}}/tags/" } },
+        { "name": "Get Published Posts", "request": { "method": "GET", "url": "{{baseUrl}}/posts/" } },
+        { "name": "Get Post Detail", "request": { "method": "GET", "url": "{{baseUrl}}/posts/design-systems-in-figma/", "header": [{ "key": "X-Visitor-Id", "value": "{{visitorId}}" }] } },
+        { "name": "Get Post Comments", "request": { "method": "GET", "url": "{{baseUrl}}/posts/design-systems-in-figma/comments/" } }
+      ]
+    },
+    {
+      "name": "Visitor Actions",
+      "item": [
+        {
+          "name": "Toggle Post Like",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/posts/design-systems-in-figma/like/",
+            "header": [{ "key": "X-Visitor-Id", "value": "{{visitorId}}" }]
+          }
+        },
+        {
+          "name": "Submit Visitor Comment",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/posts/design-systems-in-figma/comments/",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Visitor Reader\",\n  \"email\": \"reader@example.com\",\n  \"content\": \"Really loved your insights on modular component tokens!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Send Contact Message",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/contact/",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Potential Client\",\n  \"email\": \"client@example.com\",\n  \"subject\": \"Product Design Project Inquiry\",\n  \"message\": \"Hello Saima, I saw your portfolio and would love to discuss a design contract.\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Owner Management (Protected Writes)",
+      "item": [
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/profile/",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{ownerToken}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"headline\": \"Senior Full-Stack Developer & UI/UX Designer\"\n}" }
+          }
+        },
+        {
+          "name": "Create Skill",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/skills/",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{ownerToken}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Tailwind CSS\",\n  \"category\": \"FRONTEND\",\n  \"proficiency\": 90,\n  \"is_featured\": true\n}" }
+          }
+        },
+        {
+          "name": "Create Post",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/posts/",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{ownerToken}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Advanced Django REST Framework Architecture\",\n  \"content\": \"In this article, we explore clean architecture patterns, rate throttling, and permission classes in Django REST Framework.\" ,\n  \"status\": \"DRAFT\"\n}" }
+          }
+        },
+        {
+          "name": "Approve Comment",
+          "request": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/comments/1/",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{ownerToken}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"is_approved\": true\n}" }
+          }
+        },
+        {
+          "name": "Get Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/dashboard/stats/",
+            "header": [{ "key": "Authorization", "value": "Bearer {{ownerToken}}" }]
+          }
+        }
+      ]
+    }
+  ]
+}
